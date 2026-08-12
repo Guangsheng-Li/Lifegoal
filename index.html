@@ -88,6 +88,7 @@ h1{font-size:14px;margin:0 0 5px;color:var(--xp);text-shadow:2px 2px 0 #7a5a12;l
 .q{display:flex;gap:9px;align-items:flex-start;margin:0 0 11px}.q:last-child{margin-bottom:0}
 .qg{width:58px;flex:0 0 auto;text-align:center;border-radius:6px;font-size:8px;color:#0d0b16;padding:6px 3px;font-weight:bold}
 .qitems{flex:1;min-width:0;font-size:10px;line-height:1.9;padding-top:4px}
+.qitems.two-col{column-count:2;column-gap:16px}.qitems.two-col .it{break-inside:avoid}
 .it{display:block}.it.done{color:var(--ink)}.it.done::before{content:"\2713 ";color:var(--ti);font-weight:bold}
 .it.todo{color:var(--muted)}.it.todo::before{content:"\2610 ";color:#8079a8}
 .it.goal{color:var(--ink);margin-left:10px}.it.goal::before{content:"▸ ";color:var(--de);margin-left:-10px}
@@ -118,7 +119,7 @@ textarea.fld{height:110px}
 </style></head>
 <body>
 <div class="wrap">
- <h1>德智体美劳 · QUEST LOG</h1>
+ <h1>QUEST LOG</h1>
  <p class="sub">EVERY STEP FEEDS YOUR ADVENTURER</p>
 
  <div class="card" style="padding:0;overflow:hidden;border-radius:12px">
@@ -166,7 +167,7 @@ textarea.fld{height:110px}
   <button class="btn" onclick="applyText()">Apply</button>
  </details></div>
 
- <div class="foot">done item = +10 XP &middot; streak = show up daily<br>you never need all 5 &mdash; any step counts</div>
+ <div class="foot">done item = +10 XP &middot; streak = show up daily</div>
 </div>
 <div id="flash"><span id="flashtxt">LEVEL UP!</span></div>
 
@@ -224,8 +225,13 @@ function parse(md){const lines=md.split(/\r?\n/).filter(l=>l.trim().startsWith('
  days.sort((a,b)=>dnum(a.arr)-dnum(b.arr));return{days,questsTok,rules,advice,legendLabel};}
 function score(p){const dimXp={};DIMS.forEach(d=>dimXp[d.k]=0);let total=0;
  p.days.forEach(day=>{let c=0;DIMS.forEach(d=>{const n=day.done[d.k].length;dimXp[d.k]+=n*XP_PER;total+=n*XP_PER;if(n)c++});if(c===5)total+=FULL_BONUS});
- const tnum=dnum(todayArr());const past=p.days.filter(d=>dnum(d.arr)>0&&dnum(d.arr)<=tnum);
- let streak=0;for(let i=past.length-1;i>=0;i--){if(past[i].cnt>0)streak++;else break}
+ const tnum=dnum(todayArr());
+ // streak: consecutive days with progress. Today being empty does NOT reset it (day isn't over);
+ // start counting from today if today has progress, else from yesterday.
+ const prog={};p.days.forEach(d=>{prog[dnum(d.arr)]=d.cnt>0});
+ const prevDay=n=>{const dt=new Date(Math.floor(n/10000),(Math.floor(n/100)%100)-1,n%100);dt.setDate(dt.getDate()-1);return dt.getFullYear()*10000+(dt.getMonth()+1)*100+dt.getDate();};
+ let cur=tnum;if(!prog[cur])cur=prevDay(cur);
+ let streak=0;while(prog[cur]){streak++;cur=prevDay(cur);}
  const level=Math.floor(total/LVL_XP)+1,into=total%LVL_XP;const today=p.days.find(d=>dnum(d.arr)===tnum)||null;
  return{dimXp,total,streak,level,into,today,tnum}}
 function titleFor(l){let t='NOVICE';for(const[n,name]of TITLES)if(l>=n)t=name;return t}
@@ -279,21 +285,21 @@ function drawDay(){const day=P.days.find(d=>dnum(d.arr)===selKey);const dd=docum
  tt.innerHTML=WD[wd]+' '+esc(day.date)+(dnum(day.arr)===S.tnum?' &middot; TODAY':'');
  let h='';DIMS.forEach(d=>{let its='';day.done[d.k].forEach(x=>its+='<span class="it done">'+esc(x)+'</span>');
   day.todo[d.k].forEach(x=>its+='<span class="it todo">'+esc(x)+'</span>');
+  const n=day.done[d.k].length+day.todo[d.k].length;
   if(!its)its='<span class="it none">&mdash; rest &mdash;</span>';
-  h+='<div class="q"><span class="qg" style="background:'+d.c+'">'+d.en+'</span><div class="qitems">'+its+'</div></div>';});
+  h+='<div class="q"><span class="qg" style="background:'+d.c+'">'+d.en+'</span><div class="qitems'+(n>=4?' two-col':'')+'">'+its+'</div></div>';});
  dd.innerHTML=h;}
 
 function selectDay(key){selKey=key;drawWeek();drawDay();}
 document.getElementById('grid').addEventListener('click',e=>{const t=e.target.closest('[data-day]');if(t)selectDay(+t.getAttribute('data-day'));});
 
 function renderGem(i){const d=DIMS[i],xp=S.dimXp[d.k],lv2=Math.floor(xp/DIM_LVL_XP)+1,into=xp%DIM_LVL_XP;
- const days=P.days.filter(x=>x.done[d.k].length).length;const q=(P.questsTok[d.k]||[]).filter(t=>t.item).map(t=>t.item).join(' &middot; ')||'&mdash;';
+ const days=P.days.filter(x=>x.done[d.k].length).length;
  const el=document.getElementById('detail');el.classList.add('show');
  el.innerHTML='<button class="dclose" onclick="closeGem()">x</button>'+
   '<div class="dt" style="color:'+d.c+'">'+d.en+' &middot; Lv '+lv2+'</div>'+
   '<div class="row">XP '+xp+' &middot; next lv in '+(DIM_LVL_XP-into)+' XP</div>'+
-  '<div class="row">active '+days+' / '+P.days.length+' days this week</div>'+
-  '<div class="row">target: '+esc(q)+'</div>';}
+  '<div class="row">active '+days+' / '+P.days.length+' days this week</div>';}
 function showGem(i){if(openGem===i){closeGem();return;}openGem=i;renderGem(i);}
 function closeGem(){openGem=-1;document.getElementById('detail').classList.remove('show');}
 
