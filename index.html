@@ -190,6 +190,7 @@ const DEFAULT_DATA=`
 | No.33     | T早上回顾<br>T晚上回顾 | T阅读资治通鉴 | T基础运动量      |     | 英语：<br>T词组背诵，TWSJ阅读<br>金融：<br>TAgri 基本面学习<br>数学：<br>计算机： | T不同时做两件事<br>T不看bilibili |          |
 |           |                |         |             |     |                                                          |                         |          |
 `;
+const DEFAULT_URL='https://raw.githubusercontent.com/Guangsheng-Li/Lifegoal/main/Life%20Goal%20-%20%E5%BE%B7%E6%99%BA%E4%BD%93%E7%BE%8E%E5%8A%B3.md';
 function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function recall(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function isDate(s){return /^\s*\d{4}\s*[.\-\/]\s*\d{1,2}\s*[.\-\/]\s*\d{1,2}\s*$/.test(s)}
@@ -302,11 +303,16 @@ function flash(t){const f=document.getElementById('flash');document.getElementBy
 function popScene(t){const h=document.getElementById('hyah');h.textContent=t;h.classList.remove('go');void h.offsetWidth;h.classList.add('go');}
 function celebrate(){const h=document.getElementById('hero');h.className='hero anim-attack';setTimeout(()=>render(currentMd),1500);}
 function applyText(){currentMd=document.getElementById('ta').value||DEFAULT_DATA;store('dztml_md',currentMd);render(currentMd);}
-async function loadUrl(){const u=document.getElementById('url').value.trim();if(!u)return;
- try{const r=await fetch(u,{cache:'no-store'});const t=await r.text();currentMd=t;store('dztml_url',u);store('dztml_md',t);render(t);document.getElementById('settings').open=false;}
- catch(e){alert('Could not load — must be a public raw link.')}}
+async function loadUrl(u,silent){u=(typeof u==='string'&&u)?u:document.getElementById('url').value.trim();if(!u)return;
+ const bust=u+(u.indexOf('?')>=0?'&':'?')+'_='+(new Date().getTime());
+ try{const r=await fetch(bust,{cache:'no-store'});if(!r.ok)throw 0;const t=await r.text();currentMd=t;store('dztml_url',u);store('dztml_md',t);render(t);const s=document.getElementById('settings');if(s)s.open=false;}
+ catch(e){if(!silent)alert('Could not load — must be a public raw link.')}}
 document.getElementById('hero').addEventListener('click',()=>{popScene('HYAH!');celebrate();});
 (function(){const st=document.getElementById('stars');let h='';for(let i=0;i<34;i++){const x=Math.random()*100,y=Math.random()*55,dl=(Math.random()*3).toFixed(2);h+='<span style="left:'+x+'%;top:'+y+'%;animation-delay:'+dl+'s"></span>';}st.innerHTML=h;
  const em=document.getElementById('embers');let e='';for(let i=0;i<7;i++){const dx=(Math.random()*30-15).toFixed(0),dl=(Math.random()*2.4).toFixed(2),lf=(Math.random()*10).toFixed(0);e+='<span style="left:'+(50+ +lf)+'px;--dx:'+dx+'px;animation-delay:'+dl+'s"></span>';}em.innerHTML=e;})();
-(function(){const su=recall('dztml_url'),sm=recall('dztml_md');if(su){document.getElementById('url').value=su;loadUrl();}else{currentMd=sm||DEFAULT_DATA;render(currentMd);}})();
+(function(){const su=recall('dztml_url')||DEFAULT_URL,sm=recall('dztml_md');
+ document.getElementById('url').value=su;
+ currentMd=sm||DEFAULT_DATA;render(currentMd);   // show cached/baked data instantly
+ if(su)loadUrl(su,true);                          // then silently refresh from GitHub
+})();
 </script></body></html>
