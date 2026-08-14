@@ -10,11 +10,15 @@
 <title>德智体美劳 · Quest Log</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
+/* Zpix = pixel font with BOTH Latin + CJK glyphs, so Chinese and English match. Falls back to Press Start 2P (Latin only) if it fails. */
+@font-face{font-family:'Zpix';font-display:swap;
+ src:url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font/dist/Zpix.woff2') format('woff2'),
+     url('https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font/dist/Zpix.ttf') format('truetype');}
 :root{--bg:#0d0b16;--panel:#1a1730;--panel2:#221d3a;--line:#332c50;--ink:#f2efff;--muted:#a49cca;
  --de:#f0b23e;--zhi:#5b8cf0;--ti:#4bcf86;--mei:#d574bb;--lao:#59b6cf;--xp:#ffd54a;--hp:#ff5f86;}
 *{box-sizing:border-box}html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:"Press Start 2P",ui-monospace,Menlo,Consolas,monospace;
- line-height:1.5;padding:16px 12px 48px;-webkit-font-smoothing:none}
+body{background:var(--bg);color:var(--ink);font-family:"Zpix","Press Start 2P",ui-monospace,Menlo,Consolas,monospace;
+ line-height:1.6;padding:16px 12px 48px;-webkit-font-smoothing:none}
 .wrap{max-width:470px;margin:0 auto}
 h1{font-size:14px;margin:0 0 5px;color:var(--xp);text-shadow:2px 2px 0 #7a5a12;letter-spacing:.5px}
 .sub{font-size:8px;color:var(--muted);margin:0 0 13px;letter-spacing:1px}
@@ -101,6 +105,9 @@ h1{font-size:14px;margin:0 0 5px;color:var(--xp);text-shadow:2px 2px 0 #7a5a12;l
 .grid .d{color:var(--muted);white-space:nowrap;display:flex;flex-direction:column;justify-content:center;line-height:1.35;cursor:pointer;padding:2px 4px;border-radius:5px}
 .grid .d .wd{color:#8079a8}.grid .d.sun .wd{color:var(--hp)}
 .grid .d.sel{background:#3a3168;color:#fff}
+.grid .d.hasdiary{background:rgba(255,213,74,.12)}
+.grid .d.hasdiary.sel{background:#3a3168}
+.jdot{display:block;width:7px;height:7px;border-radius:50%;background:var(--xp);box-shadow:0 0 7px var(--xp);margin:3px auto 0}
 .cell{height:22px;border-radius:3px;background:#0c0a18;border:1px solid var(--line);cursor:pointer}
 .cell.todo{border:1px dashed #5a5488;background:#161227}.today .wd{color:var(--xp)}
 .dayttl{font-size:10px;color:var(--xp);margin:14px 2px 10px;letter-spacing:.5px}
@@ -395,8 +402,8 @@ function render(md){const p=parse(md),s=score(p);P=p;S=s;
 function drawWeek(){const g=document.getElementById('grid');
  g.innerHTML='<div class="h"></div>'+DIMS.map(d=>'<div class="h">'+d.en+'</div>').join('');
  P.days.slice().reverse().forEach(day=>{const wd=new Date(day.arr[0],day.arr[1]-1,day.arr[2]).getDay();const key=dnum(day.arr);
-  const cls='d '+(wd===0?'sun ':'')+(key===S.tnum?'today ':'')+(key===selKey?'sel':'');
-  g.insertAdjacentHTML('beforeend','<div class="'+cls+'" data-day="'+key+'"><span class="wd">'+WD[wd]+'</span><span>'+day.date.replace(/^\d{4}[.]/,'')+'</span></div>');
+  const cls='d '+(wd===0?'sun ':'')+(key===S.tnum?'today ':'')+(key===selKey?'sel ':'')+(day.diary?'hasdiary':'');
+  g.insertAdjacentHTML('beforeend','<div class="'+cls+'" data-day="'+key+'"><span class="wd">'+WD[wd]+'</span><span>'+day.date.replace(/^\d{4}[.]/,'')+'</span>'+(day.diary?'<span class="jdot" title="日记"></span>':'')+'</div>');
   DIMS.forEach(d=>{const has=day.done[d.k].length,td=day.todo[d.k].length;
    g.insertAdjacentHTML('beforeend','<div class="cell '+(has?'':(td?'todo':''))+'" data-day="'+key+'" style="'+(has?('background:'+d.c+';border:none'):'')+'"></div>');});});}
 
