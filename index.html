@@ -104,6 +104,13 @@ h1{font-size:14px;margin:0 0 5px;color:var(--xp);text-shadow:2px 2px 0 #7a5a12;l
 .cell{height:22px;border-radius:3px;background:#0c0a18;border:1px solid var(--line);cursor:pointer}
 .cell.todo{border:1px dashed #5a5488;background:#161227}.today .wd{color:var(--xp)}
 .dayttl{font-size:10px;color:var(--xp);margin:14px 2px 10px;letter-spacing:.5px}
+.jbox,.abox{margin-top:12px;border-radius:8px;padding:11px 12px;font-size:10px;line-height:2}
+.jbox{background:#181430;border:2px solid var(--line)}
+.jlab{font-size:8px;color:var(--muted);margin-bottom:6px;letter-spacing:1px}
+.jtext{color:var(--ink)}
+.abox{background:#1f1a0e;border:2px solid #6a5a1e}
+.alab{font-size:8px;color:var(--xp);margin-bottom:6px;letter-spacing:1px}
+.atext{color:#f2e8c4}
 
 .rules{font-size:10px;color:var(--muted);line-height:2.2}.rules .r::before{content:"x ";color:var(--hp)}
 .advice{font-size:10px;color:var(--ti);line-height:2.1;margin-top:8px}.advice .a::before{content:"> ";color:var(--de)}
@@ -179,17 +186,116 @@ const WD=['SUN','MON','TUE','WED','THU','FRI','SAT'];
 const TITLES=[[1,'NOVICE'],[3,'APPRENTICE'],[6,'JOURNEYMAN'],[10,'ADEPT'],[15,'VETERAN'],[20,'MASTER'],[30,'GRANDMASTER']];
 const DEFAULT_DATA=`
 
-|           | 德              | 智       | 体           | 美   | 劳                                                        | 习惯培养                    | Claude建议 |
-| --------- | -------------- | ------- | ----------- | --- | -------------------------------------------------------- | ----------------------- | -------- |
-| 2026.8.15 |                |         |             |     |                                                          |                         |          |
-| 2026.8.14 |                |         |             |     |                                                          |                         |          |
-| 2026.8.13 |                |         |             |     |                                                          |                         |          |
-| 2026.8.12 | T早上回顾<br>T晚上回顾 |         | T基础运动量      |     | T词组背诵<br>TWSJ阅读<br>TAgri 基本面                             | T不同时做两件事<br>T不看bilibili |          |
-| 2026.8.11 | 每天早上晚上回顾       |         | 上下班各骑车10min |     |                                                          |                         |          |
-| 2026.8.10 |                |         |             |     |                                                          |                         |          |
-| 2026.8.9  |                |         |             |     |                                                          |                         |          |
-| No.33     | T早上回顾<br>T晚上回顾 | T阅读资治通鉴 | T基础运动量      |     | 英语：<br>T词组背诵，TWSJ阅读<br>金融：<br>TAgri 基本面学习<br>数学：<br>计算机： | T不同时做两件事<br>T不看bilibili |          |
-|           |                |         |             |     |                                                          |                         |          |
+
+2026.8.15
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		T腾飞五千年
+	体：
+		T基础运动量
+	美：
+	劳：
+		T词组背诵
+		TWSJ阅读
+		TAgri 基本面
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.14
+	德：
+		早上回顾
+		T晚上回顾
+	智：
+		腾飞五千年
+	体：
+		T基础运动量
+	美：
+	劳：
+		T词组背诵
+		TWSJ阅读
+		TAgri 基本面
+	习惯培养:
+		不看bilibili
+2026.8.13
+	德：
+		早上回顾
+		晚上回顾
+	智：
+		腾飞五千年
+	体：
+		简单拉伸
+	美：
+	劳：
+		词组背诵
+		WSJ阅读
+		Agri 基本面
+	习惯培养:
+		不看bilibili
+	日记：Agri基本面我大概花了30-40min，一天下来我没有看bilibili（之前每天都看），但是end of day，I still feel emptiness and slight guilt, partly because I dont see me progress to my goal, or to my short term goal (become a Agri Trader by end of year). 
+	Claude建议：你在用"读了30–40min Agri基本面"衡量进度——那是输入，不是产出。空虚正是"只输入、没产出"的信号，和你几个月前自己写下的 output first, input second 正面相撞，你在重复同一个陷阱。不看bilibili只是去掉一个负面，不等于加了一个正面。"年底成为Agri Trader"太虚、本周没有可衡量的里程碑，所以你看不到进度——因为没有东西可指。修正：每天读完立刻产出一个可展示的小东西，哪怕5行——palm/soy价差的1个驱动 ＋ 1个trade question ＋ 1个数据点。有作品，进度才看得见。
+2026.8.12
+	德：
+		早上回顾
+		晚上回顾
+	智：
+		腾飞五千年
+	体：
+		上班骑车
+		下班骑车
+		饮食健康
+	美：
+	劳：
+		词组背诵
+		WSJ阅读
+		Agri 基本面
+	习惯培养:
+		不看bilibili
+2026.8.11
+	德：
+		早上回顾
+	智：
+	体：
+		上班骑车
+		下班骑车
+	美：
+	劳：
+2026.8.10
+	德：
+	智：
+	体：
+	美：
+	劳：
+2026.8.9
+	德
+	智
+	体
+	美
+	劳
+No.33
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		T读历史
+	体：
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TAgri 基本面
+		学习
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
 `;
 const DEFAULT_URL='https://raw.githubusercontent.com/Guangsheng-Li/Lifegoal/main/Life%20Goal%20-%20%E5%BE%B7%E6%99%BA%E4%BD%93%E7%BE%8E%E5%8A%B3.md';
 function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
@@ -209,20 +315,35 @@ function cellTokens(raw){const out=[];(raw||'').split(/<br\s*\/?>/i).forEach(lin
 function doneOf(t){return t.filter(x=>x.item&&!x.target).map(x=>x.item)}
 function todoOf(t){return t.filter(x=>x.item&&x.target).map(x=>x.item)}
 function esc(s){return(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function parse(md){const lines=md.split(/\r?\n/).filter(l=>l.trim().startsWith('|'));
- let col=null,questsTok={},rules=[],advice=[],days=[],legendLabel='';
- for(const line of lines){if(/^[-:\s|]+$/.test(line.replace(/\|/g,'')))continue;
-  let c=line.split('|').map(x=>x.trim());if(c.length&&c[0]==='')c.shift();if(c.length&&c[c.length-1]==='')c.pop();
-  if(col===null){if(DIMS.every(d=>c.includes(d.k))){col={};DIMS.forEach(d=>col[d.k]=c.indexOf(d.k));
-    ['习惯培养','Claude建议'].forEach(e=>{const i=c.indexOf(e);if(i>=0)col[e]=i});}continue;}
-  const first=c[0]||'',get=k=>{const i=col[k];return(i!=null&&c[i])?c[i]:''};
-  if(isDate(first)){const rec={date:first.trim(),arr:normDate(first),done:{},todo:{},cnt:0,items:0};
-   DIMS.forEach(d=>{const toks=cellTokens(get(d.k));const dn=doneOf(toks),td=todoOf(toks);
-    rec.done[d.k]=dn;rec.todo[d.k]=td;if(dn.length){rec.cnt++;rec.items+=dn.length}});days.push(rec);}
-  else if(first!==''){legendLabel=first;DIMS.forEach(d=>{const toks=cellTokens(get(d.k));if(toks.length)questsTok[d.k]=toks});
-   const strip=a=>a.map(x=>isTarget(x)?tgt(x):x);
-   if(col['习惯培养']!=null)rules=strip(items(get('习惯培养')));if(col['Claude建议']!=null)advice=strip(items(get('Claude建议')));}}
- days.sort((a,b)=>dnum(a.arr)-dnum(b.arr));return{days,questsTok,rules,advice,legendLabel};}
+// NEW FORMAT: tab-indented outline. Level0=date or legend(No.33); level1=section (德/智/体/美/劳/习惯培养/日记/Claude建议);
+// level2=item (or sub-category ending ： for 劳 in legend); level3=item under sub-category. T-prefix=target(not done), no T=done.
+function parse(md){const lines=md.split(/\r?\n/);const DK=DIMS.map(d=>d.k);
+ let days=[],cur=null,sec=null,legend=null,legendLabel='';
+ const mk=date=>{const o={date,arr:normDate(date),done:{},todo:{},cnt:0,items:0,diary:'',advice:'',rules:[]};DK.forEach(k=>{o.done[k]=[];o.todo[k]=[];});return o;};
+ for(const raw of lines){if(!raw.replace(/\t/g,'').trim())continue;
+  const tabs=raw.length-raw.replace(/^\t+/,'').length;const text=raw.trim();
+  if(tabs===0){if(isDate(text)){cur=mk(text);days.push(cur);sec=null;}
+   else{legendLabel=text;legend={isLegend:true,questsTok:{},rules:[]};DK.forEach(k=>legend.questsTok[k]=[]);cur=legend;sec=null;}continue;}
+  if(!cur)continue;
+  if(tabs===1){const m=text.match(/^([^：:]+)[：:]?\s*(.*)$/);const name=(m?m[1]:text).trim(),inline=(m&&m[2]?m[2]:'').trim();
+   if(DK.indexOf(name)>=0)sec=name;
+   else if(name==='习惯培养')sec='rules';
+   else if(name==='日记'){sec='diary';if(!cur.isLegend&&inline)cur.diary=inline;}
+   else if(name==='Claude建议'){sec='advice';if(!cur.isLegend&&inline)cur.advice=inline;}
+   else sec=null;
+   continue;}
+  if(!sec)continue;  // tabs>=2
+  if(sec==='rules'){cur.rules.push(isTarget(text)?tgt(text):text);continue;}
+  if(sec==='diary'){cur.diary=(cur.diary?cur.diary+' ':'')+text;continue;}
+  if(sec==='advice'){cur.advice=(cur.advice?cur.advice+' ':'')+text;continue;}
+  if(DK.indexOf(sec)>=0){
+   if(/[：:]\s*$/.test(text)&&tabs===2){if(cur.isLegend)cur.questsTok[sec].push({cat:text.replace(/[：:]\s*$/,'').trim()});continue;}
+   const t=isTarget(text),val=t?tgt(text):text;
+   if(cur.isLegend)cur.questsTok[sec].push({item:val,target:t});
+   else{if(t)cur.todo[sec].push(val);else cur.done[sec].push(val);}}}
+ days.forEach(day=>{let c=0;DK.forEach(k=>{if(day.done[k].length){c++;day.items+=day.done[k].length;}});day.cnt=c;});
+ days.sort((a,b)=>dnum(a.arr)-dnum(b.arr));
+ const L=legend||{questsTok:{},rules:[]};return{days,questsTok:L.questsTok,rules:L.rules,legendLabel};}
 function score(p){const dimXp={};DIMS.forEach(d=>dimXp[d.k]=0);let total=0;
  p.days.forEach(day=>{let c=0;DIMS.forEach(d=>{const n=day.done[d.k].length;dimXp[d.k]+=n*XP_PER;total+=n*XP_PER;if(n)c++});if(c===5)total+=FULL_BONUS});
  const tnum=dnum(todayArr());
@@ -262,7 +383,7 @@ function render(md){const p=parse(md),s=score(p);P=p;S=s;
  tg.innerHTML=th;
  // rules
  document.getElementById('rules').innerHTML=p.rules.length?p.rules.map(r=>'<span class="r" style="display:block">'+esc(r)+'</span>').join(''):'<span style="color:#544e75">no rules set</span>';
- document.getElementById('advice').innerHTML=p.advice.length?p.advice.map(a=>'<span class="a" style="display:block">'+esc(a)+'</span>').join(''):'';
+ document.getElementById('advice').innerHTML='<span style="color:#8079a8;font-size:8px">Journal &amp; Claude&#39;s notes show under each day in the TODAY tab.</span>';
  // hero
  const hero=document.getElementById('hero');hero.className='hero '+(tItems>0&&s.today&&s.today.cnt===5?'anim-attack':(s.streak>=2?'anim-run':'anim-idle'));
  if(prevTotal>=0&&s.level>Math.floor(prevTotal/LVL_XP)+1)flash('LEVEL UP!');
@@ -288,6 +409,8 @@ function drawDay(){const day=P.days.find(d=>dnum(d.arr)===selKey);const dd=docum
   const n=day.done[d.k].length+day.todo[d.k].length;
   if(!its)its='<span class="it none">&mdash; rest &mdash;</span>';
   h+='<div class="q"><span class="qg" style="background:'+d.c+'">'+d.en+'</span><div class="qitems'+(n>=4?' two-col':'')+'">'+its+'</div></div>';});
+ if(day.diary)h+='<div class="jbox"><div class="jlab">JOURNAL &middot; 日记</div><div class="jtext">'+esc(day.diary)+'</div></div>';
+ if(day.advice)h+='<div class="abox"><div class="alab">CLAUDE &middot; 建议</div><div class="atext">'+esc(day.advice)+'</div></div>';
  dd.innerHTML=h;}
 
 function selectDay(key){selKey=key;drawWeek();drawDay();}
