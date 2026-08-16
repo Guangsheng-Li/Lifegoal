@@ -191,9 +191,58 @@ const TITLES=[[1,'NOVICE'],[3,'APPRENTICE'],[6,'JOURNEYMAN'],[10,'ADEPT'],[15,'V
 const DEFAULT_DATA=`
 
 
-2026.8.15
+
+2026.8.17
 	德：
 		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TAgri 基本面
+			TAgri模拟交易
+		学习
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+No.34
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TAgri 基本面
+			TAgri模拟交易
+		学习
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.16
+	德：
+		早上回顾
 		T晚上回顾
 	智：
 		T腾飞五千年
@@ -208,21 +257,41 @@ const DEFAULT_DATA=`
 		不看bilibili
 	日记：
 	Claude建议：
+2026.8.15
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		T腾飞五千年
+	体：
+		力量训练
+	美：
+	劳：
+		词组背诵
+		TWSJ阅读
+		TAgri 基本面
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
 2026.8.14
 	德：
 		早上回顾
 		T晚上回顾
 	智：
-		腾飞五千年
+		T腾飞五千年
 	体：
 		T基础运动量
 	美：
 	劳：
 		T词组背诵
-		TWSJ阅读
+		WSJ阅读
 		TAgri 基本面
+		Agri输出：模拟交易PalmOil Timespread
 	习惯培养:
 		不看bilibili
+	日记：
+	Claude建议：
 2026.8.13
 	德：
 		早上回顾
@@ -272,12 +341,6 @@ const DEFAULT_DATA=`
 	体：
 	美：
 	劳：
-2026.8.9
-	德
-	智
-	体
-	美
-	劳
 No.33
 	德：
 		T早上回顾
@@ -308,6 +371,8 @@ function isDate(s){return /^\s*\d{4}\s*[.\-\/]\s*\d{1,2}\s*[.\-\/]\s*\d{1,2}\s*$
 function normDate(s){const m=s.match(/(\d{4})\s*[.\-\/]\s*(\d{1,2})\s*[.\-\/]\s*(\d{1,2})/);return m?[+m[1],+m[2],+m[3]]:null}
 function dnum(a){return a?a[0]*10000+a[1]*100+a[2]:0}
 function todayArr(){const d=new Date();return[d.getFullYear(),d.getMonth()+1,d.getDate()]}
+function emptyDim(){const o={};DIMS.forEach(d=>o[d.k]=[]);return o;}
+function weekDates(tnum){const dt=new Date(Math.floor(tnum/10000),(Math.floor(tnum/100)%100)-1,tnum%100);dt.setDate(dt.getDate()-dt.getDay());const out=[];for(let i=0;i<7;i++){const x=new Date(dt);x.setDate(dt.getDate()+i);out.push([x.getFullYear(),x.getMonth()+1,x.getDate()]);}return out;}
 function items(c){return(c||'').split(/<br\s*\/?>/i).map(s=>s.trim()).filter(Boolean)}
 function isTarget(i){return /^T(?![a-z])/.test(i)}
 function tgt(i){return i.replace(/^T/,'').trim()}
@@ -322,12 +387,12 @@ function esc(s){return(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':
 // NEW FORMAT: tab-indented outline. Level0=date or legend(No.33); level1=section (德/智/体/美/劳/习惯培养/日记/Claude建议);
 // level2=item (or sub-category ending ： for 劳 in legend); level3=item under sub-category. T-prefix=target(not done), no T=done.
 function parse(md){const lines=md.split(/\r?\n/);const DK=DIMS.map(d=>d.k);
- let days=[],cur=null,sec=null,legend=null,legendLabel='';
+ let days=[],cur=null,sec=null,legends=[];
  const mk=date=>{const o={date,arr:normDate(date),done:{},todo:{},cnt:0,items:0,diary:'',advice:'',rules:[]};DK.forEach(k=>{o.done[k]=[];o.todo[k]=[];});return o;};
  for(const raw of lines){if(!raw.replace(/\t/g,'').trim())continue;
   const tabs=raw.length-raw.replace(/^\t+/,'').length;const text=raw.trim();
   if(tabs===0){if(isDate(text)){cur=mk(text);days.push(cur);sec=null;}
-   else{legendLabel=text;legend={isLegend:true,questsTok:{},rules:[]};DK.forEach(k=>legend.questsTok[k]=[]);cur=legend;sec=null;}continue;}
+   else{const num=parseInt((text.match(/\d+/)||['0'])[0],10);const lg={isLegend:true,label:text,num:isNaN(num)?0:num,questsTok:{},rules:[]};DK.forEach(k=>lg.questsTok[k]=[]);legends.push(lg);cur=lg;sec=null;}continue;}
   if(!cur)continue;
   if(tabs===1){const m=text.match(/^([^：:]+)[：:]?\s*(.*)$/);const name=(m?m[1]:text).trim(),inline=(m&&m[2]?m[2]:'').trim();
    if(DK.indexOf(name)>=0)sec=name;
@@ -347,7 +412,9 @@ function parse(md){const lines=md.split(/\r?\n/);const DK=DIMS.map(d=>d.k);
    else{if(t)cur.todo[sec].push(val);else cur.done[sec].push(val);}}}
  days.forEach(day=>{let c=0;DK.forEach(k=>{if(day.done[k].length){c++;day.items+=day.done[k].length;}});day.cnt=c;});
  days.sort((a,b)=>dnum(a.arr)-dnum(b.arr));
- const L=legend||{questsTok:{},rules:[]};return{days,questsTok:L.questsTok,rules:L.rules,legendLabel};}
+ let L={questsTok:{},rules:[],label:''};DK.forEach(k=>L.questsTok[k]=[]);
+ if(legends.length)L=legends.reduce((a,b)=>b.num>=a.num?b:a);  // current week = highest No.
+ return{days,questsTok:L.questsTok,rules:L.rules,legendLabel:L.label};}
 function score(p){const dimXp={};DIMS.forEach(d=>dimXp[d.k]=0);let total=0;
  p.days.forEach(day=>{let c=0;DIMS.forEach(d=>{const n=day.done[d.k].length;dimXp[d.k]+=n*XP_PER;total+=n*XP_PER;if(n)c++});if(c===5)total+=FULL_BONUS});
  const tnum=dnum(todayArr());
@@ -360,9 +427,11 @@ function score(p){const dimXp={};DIMS.forEach(d=>dimXp[d.k]=0);let total=0;
  const level=Math.floor(total/LVL_XP)+1,into=total%LVL_XP;const today=p.days.find(d=>dnum(d.arr)===tnum)||null;
  return{dimXp,total,streak,level,into,today,tnum}}
 function titleFor(l){let t='NOVICE';for(const[n,name]of TITLES)if(l>=n)t=name;return t}
-let prevTotal=parseInt(recall('dztml_total')||'-1',10),currentMd=DEFAULT_DATA,P=null,S=null,openGem=-1,selKey=0;
+let prevTotal=parseInt(recall('dztml_total')||'-1',10),currentMd=DEFAULT_DATA,P=null,S=null,openGem=-1,selKey=0,WK=[];
 
 function render(md){const p=parse(md),s=score(p);P=p;S=s;
+ const dmap={};p.days.forEach(d=>dmap[dnum(d.arr)]=d);
+ WK=weekDates(s.tnum).map(a=>{const k=dnum(a);return dmap[k]||{date:a[0]+'.'+a[1]+'.'+a[2],arr:a,done:emptyDim(),todo:emptyDim(),cnt:0,items:0,diary:'',advice:''};});
  lv.textContent=s.level;title2.textContent=titleFor(s.level);
  setTimeout(()=>{xpbar.style.width=(s.into/LVL_XP*100)+'%'},60);
  xpnow.textContent=s.into+' XP';xpnext.textContent='/'+LVL_XP+' TO NEXT LV';flame.textContent=s.streak;
@@ -379,11 +448,11 @@ function render(md){const p=parse(md),s=score(p);P=p;S=s;
  // targets pane
  const tg=document.getElementById('targets');
  let th='<div class="tsub">WEEK TARGETS'+(p.legendLabel?(' &middot; '+esc(p.legendLabel)):'')+'</div>';
- DIMS.forEach(d=>{const toks=p.questsTok[d.k]||[];const daysDone=p.days.filter(x=>x.done[d.k].length).length;const nT=toks.filter(t=>t.item).length;
+ DIMS.forEach(d=>{const toks=p.questsTok[d.k]||[];const daysDone=WK.filter(x=>x.done[d.k].length).length;const nT=toks.filter(t=>t.item).length;
   let its='';toks.forEach(t=>{its+=t.cat?('<span class="cat">'+esc(t.cat)+'</span>'):('<span class="it goal">'+esc(t.item)+'</span>')});
   if(!its)its='<span class="it none">&mdash; none &mdash;</span>';
   th+='<div class="q"><span class="qg" style="background:'+d.c+'">'+d.en+'</span><div class="qitems">'+its+
-    '<span class="tprog">'+nT+' target'+(nT===1?'':'s')+' &middot; active '+daysDone+' / '+p.days.length+' days</span></div></div>';});
+    '<span class="tprog">'+nT+' target'+(nT===1?'':'s')+' &middot; active '+daysDone+' / '+WK.length+' days</span></div></div>';});
  tg.innerHTML=th;
  // rules
  document.getElementById('rules').innerHTML=p.rules.length?p.rules.map(r=>'<span class="r" style="display:block">'+esc(r)+'</span>').join(''):'<span style="color:#544e75">no rules set</span>';
@@ -392,19 +461,19 @@ function render(md){const p=parse(md),s=score(p);P=p;S=s;
  const hero=document.getElementById('hero');hero.className='hero '+(tItems>0&&s.today&&s.today.cnt===5?'anim-attack':(s.streak>=2?'anim-run':'anim-idle'));
  if(prevTotal>=0&&s.level>Math.floor(prevTotal/LVL_XP)+1)flash('LEVEL UP!');
  prevTotal=s.total;store('dztml_total',String(s.total));document.getElementById('ta').value=md;
- // week log + day detail (default selected = today if present else latest)
- if(!p.days.some(d=>dnum(d.arr)===selKey))selKey=p.days.some(d=>dnum(d.arr)===s.tnum)?s.tnum:(p.days.length?dnum(p.days[p.days.length-1].arr):0);
+ // week log + day detail — current week (Sun→Sat containing today); default selected = today
+ if(!WK.some(d=>dnum(d.arr)===selKey))selKey=s.tnum;
  drawWeek();drawDay();}
 
 function drawWeek(){const g=document.getElementById('grid');
  g.innerHTML='<div class="h"></div>'+DIMS.map(d=>'<div class="h">'+d.en+'</div>').join('');
- P.days.slice().reverse().forEach(day=>{const wd=new Date(day.arr[0],day.arr[1]-1,day.arr[2]).getDay();const key=dnum(day.arr);
+ WK.slice().reverse().forEach(day=>{const wd=new Date(day.arr[0],day.arr[1]-1,day.arr[2]).getDay();const key=dnum(day.arr);
   const cls='d '+(wd===0?'sun ':'')+(key===S.tnum?'today ':'')+(key===selKey?'sel ':'')+(day.diary?'hasdiary':'');
   g.insertAdjacentHTML('beforeend','<div class="'+cls+'" data-day="'+key+'"><span class="wd">'+(key===S.tnum?'<span class="tdot"></span>':'')+WD[wd]+'</span><span>'+day.date.replace(/^\d{4}[.]/,'')+'</span></div>');
   DIMS.forEach(d=>{const has=day.done[d.k].length,td=day.todo[d.k].length;
    g.insertAdjacentHTML('beforeend','<div class="cell '+(has?'':(td?'todo':''))+'" data-day="'+key+'" style="'+(has?('background:'+d.c+';border:none'):'')+'"></div>');});});}
 
-function drawDay(){const day=P.days.find(d=>dnum(d.arr)===selKey);const dd=document.getElementById('daydetail'),tt=document.getElementById('dayttl');
+function drawDay(){const day=WK.find(d=>dnum(d.arr)===selKey)||P.days.find(d=>dnum(d.arr)===selKey);const dd=document.getElementById('daydetail'),tt=document.getElementById('dayttl');
  if(!day){tt.textContent='';dd.innerHTML='';return;}
  const wd=new Date(day.arr[0],day.arr[1]-1,day.arr[2]).getDay();
  tt.innerHTML=WD[wd]+' '+esc(day.date)+(dnum(day.arr)===S.tnum?' &middot; TODAY':'');
@@ -421,12 +490,12 @@ function selectDay(key){selKey=key;drawWeek();drawDay();}
 document.getElementById('grid').addEventListener('click',e=>{const t=e.target.closest('[data-day]');if(t)selectDay(+t.getAttribute('data-day'));});
 
 function renderGem(i){const d=DIMS[i],xp=S.dimXp[d.k],lv2=Math.floor(xp/DIM_LVL_XP)+1,into=xp%DIM_LVL_XP;
- const days=P.days.filter(x=>x.done[d.k].length).length;
+ const days=WK.filter(x=>x.done[d.k].length).length;
  const el=document.getElementById('detail');el.classList.add('show');
  el.innerHTML='<button class="dclose" onclick="closeGem()">x</button>'+
   '<div class="dt" style="color:'+d.c+'">'+d.en+' &middot; Lv '+lv2+'</div>'+
   '<div class="row">XP '+xp+' &middot; next lv in '+(DIM_LVL_XP-into)+' XP</div>'+
-  '<div class="row">active '+days+' / '+P.days.length+' days this week</div>';}
+  '<div class="row">active '+days+' / '+WK.length+' days this week</div>';}
 function showGem(i){if(openGem===i){closeGem();return;}openGem=i;renderGem(i);}
 function closeGem(){openGem=-1;document.getElementById('detail').classList.remove('show');}
 
