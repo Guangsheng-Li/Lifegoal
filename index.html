@@ -157,17 +157,17 @@ textarea.fld{height:110px}
  </div>
 
  <div class="tabs">
-  <button class="tab on" data-p="week" onclick="tab('week',this)">WEEK 本周</button>
-  <button class="tab" data-p="record" onclick="tab('record',this)">RECORD 历史</button>
-  <button class="tab" data-p="radar" onclick="tab('radar',this)">五维图</button>
+  <button class="tab on" data-p="week" onclick="tab('week',this)">WEEK</button>
+  <button class="tab" data-p="record" onclick="tab('record',this)">RECORD</button>
+  <button class="tab" data-p="radar" onclick="tab('radar',this)">RADAR</button>
  </div>
  <div class="card">
   <div class="pane on" id="p-week">
-   <div id="targets"></div>
-   <div class="tsub" style="margin-top:16px">WEEK LOG (SUN &#8594; SAT) &middot; TAP A DAY</div>
+   <div class="tsub">WEEK LOG (SUN &#8594; SAT) &middot; TAP A DAY</div>
    <div id="grid" class="grid"></div>
    <div class="dayttl" id="dayttl"></div>
    <div id="daydetail"></div>
+   <div id="targets" style="margin-top:18px"></div>
    <div class="tsub" style="margin-top:18px">HOUSE RULES &middot; 习惯培养</div>
    <div id="rules" class="rules"></div>
   </div>
@@ -622,8 +622,11 @@ document.getElementById('grid').addEventListener('click',e=>{const t=e.target.cl
 
 // ===== RECORD (all history) =====
 function drawRecord(){const g=document.getElementById('recgrid');
+ const ws=WK.length?dnum(WK[0].arr):0;                       // exclude current week (shown in WEEK tab)
+ const hist=P.days.filter(d=>dnum(d.arr)<ws).slice().reverse();
  g.innerHTML='<div class="h"></div>'+DIMS.map(d=>'<div class="h">'+d.en+'</div>').join('');
- P.days.slice().reverse().forEach(day=>{const wd=new Date(day.arr[0],day.arr[1]-1,day.arr[2]).getDay();const key=dnum(day.arr);
+ if(!hist.length)g.innerHTML+='<div style="grid-column:1/-1;color:#8079a8;font-size:9px;padding:8px 2px">No earlier weeks yet.</div>';
+ hist.forEach(day=>{const wd=new Date(day.arr[0],day.arr[1]-1,day.arr[2]).getDay();const key=dnum(day.arr);
   const cls='d '+(key===S.tnum?'today ':'')+(key===recKey?'sel ':'')+(day.diary?'hasdiary':'');
   g.insertAdjacentHTML('beforeend','<div class="'+cls+'" data-day="'+key+'"><span class="wd">'+(key===S.tnum?'<span class="tdot"></span>':'')+WD[wd]+'</span><span>'+esc(day.date.replace(/^\d{4}[.]/,''))+'</span></div>');
   DIMS.forEach(d=>{const has=day.done[d.k].length,td=day.todo[d.k].length;
