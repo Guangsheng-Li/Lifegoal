@@ -108,6 +108,10 @@ h1{font-size:14px;margin:0 0 5px;color:var(--xp);text-shadow:2px 2px 0 #7a5a12;l
 .cell{height:22px;border-radius:3px;background:#0c0a18;border:1px solid var(--line);cursor:pointer}
 .cell.todo{border:1px dashed #5a5488;background:#161227}.today .wd{color:var(--xp)}
 .dayttl{font-size:10px;color:var(--xp);margin:14px 2px 10px;letter-spacing:.5px}
+canvas#radar{display:block;margin:8px auto 0;max-width:100%}
+.radarlegend{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-top:14px;font-size:9px;color:var(--muted)}
+.rl{display:inline-flex;align-items:center;gap:5px}
+.rlc{width:9px;height:9px;border-radius:2px;display:inline-block}
 .jbox,.abox{margin-top:12px;border-radius:8px;padding:11px 12px;font-size:10px;line-height:2}
 .jbox{background:#181430;border:2px solid var(--line)}
 .jlab{font-size:8px;color:var(--muted);margin-bottom:6px;letter-spacing:1px}
@@ -153,19 +157,31 @@ textarea.fld{height:110px}
  </div>
 
  <div class="tabs">
-  <button class="tab on" data-p="today" onclick="tab('today',this)">TODAY</button>
-  <button class="tab" data-p="targets" onclick="tab('targets',this)">TARGETS</button>
-  <button class="tab" data-p="rules" onclick="tab('rules',this)">RULES</button>
+  <button class="tab on" data-p="week" onclick="tab('week',this)">WEEK 本周</button>
+  <button class="tab" data-p="record" onclick="tab('record',this)">RECORD 历史</button>
+  <button class="tab" data-p="radar" onclick="tab('radar',this)">五维图</button>
  </div>
  <div class="card">
-  <div class="pane on" id="p-today">
-   <div class="tsub">WEEK LOG (SUN &#8594; SAT) &middot; TAP A DAY</div>
+  <div class="pane on" id="p-week">
+   <div id="targets"></div>
+   <div class="tsub" style="margin-top:16px">WEEK LOG (SUN &#8594; SAT) &middot; TAP A DAY</div>
    <div id="grid" class="grid"></div>
    <div class="dayttl" id="dayttl"></div>
    <div id="daydetail"></div>
+   <div class="tsub" style="margin-top:18px">HOUSE RULES &middot; 习惯培养</div>
+   <div id="rules" class="rules"></div>
   </div>
-  <div class="pane" id="p-targets"><div id="targets"></div></div>
-  <div class="pane" id="p-rules"><div id="rules" class="rules"></div><div id="advice" class="advice"></div></div>
+  <div class="pane" id="p-record">
+   <div class="tsub">HISTORY &middot; 历史记录 &middot; TAP A DAY</div>
+   <div id="recgrid" class="grid"></div>
+   <div class="dayttl" id="recttl"></div>
+   <div id="recdetail"><span style="color:#8079a8;font-size:9px">Tap a day above to see its tasks, journal and advice.</span></div>
+  </div>
+  <div class="pane" id="p-radar">
+   <div class="tsub">五维 &middot; 德智体美劳</div>
+   <canvas id="radar"></canvas>
+   <div id="radarlegend" class="radarlegend"></div>
+  </div>
  </div>
 
  <div class="card"><details id="settings">
@@ -188,11 +204,127 @@ const DIMS=[{k:'德',en:'FAITH',c:'#f0b23e'},{k:'智',en:'MIND',c:'#5b8cf0'},
 const XP_PER=10,FULL_BONUS=50,LVL_XP=100,DIM_LVL_XP=50;
 const WD=['SUN','MON','TUE','WED','THU','FRI','SAT'];
 const TITLES=[[1,'NOVICE'],[3,'APPRENTICE'],[6,'JOURNEYMAN'],[10,'ADEPT'],[15,'VETERAN'],[20,'MASTER'],[30,'GRANDMASTER']];
-const DEFAULT_DATA=`
-
-
-
-2026.8.17
+const DEFAULT_DATA=`2026.8.23
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TAgri 基本面
+			TAgri模拟交易
+		学习
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：、
+2026.8.22
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TAgri 基本面
+			TAgri模拟交易
+		学习
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.21
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TAgri 基本面
+			TAgri模拟交易
+		学习
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.20
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TAgri 基本面
+			TAgri模拟交易
+		学习
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.19
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TAgri 基本面
+			TAgri模拟交易
+		学习
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.18
 	德：
 		T早上回顾
 		T晚上回顾
@@ -387,11 +519,11 @@ function esc(s){return(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':
 // NEW FORMAT: tab-indented outline. Level0=date or legend(No.33); level1=section (德/智/体/美/劳/习惯培养/日记/Claude建议);
 // level2=item (or sub-category ending ： for 劳 in legend); level3=item under sub-category. T-prefix=target(not done), no T=done.
 function parse(md){const lines=md.split(/\r?\n/);const DK=DIMS.map(d=>d.k);
- let days=[],cur=null,sec=null,legends=[];
+ let days=[],cur=null,sec=null,legends=[],catDims=new Set();
  const mk=date=>{const o={date,arr:normDate(date),done:{},todo:{},cnt:0,items:0,diary:'',advice:'',rules:[]};DK.forEach(k=>{o.done[k]=[];o.todo[k]=[];});return o;};
  for(const raw of lines){if(!raw.replace(/\t/g,'').trim())continue;
   const tabs=raw.length-raw.replace(/^\t+/,'').length;const text=raw.trim();
-  if(tabs===0){if(isDate(text)){cur=mk(text);days.push(cur);sec=null;}
+  if(tabs===0){catDims=new Set();if(isDate(text)){cur=mk(text);days.push(cur);sec=null;}
    else{const num=parseInt((text.match(/\d+/)||['0'])[0],10);const lg={isLegend:true,label:text,num:isNaN(num)?0:num,questsTok:{},rules:[]};DK.forEach(k=>lg.questsTok[k]=[]);legends.push(lg);cur=lg;sec=null;}continue;}
   if(!cur)continue;
   if(tabs===1){const m=text.match(/^([^：:]+)[：:]?\s*(.*)$/);const name=(m?m[1]:text).trim(),inline=(m&&m[2]?m[2]:'').trim();
@@ -406,7 +538,8 @@ function parse(md){const lines=md.split(/\r?\n/);const DK=DIMS.map(d=>d.k);
   if(sec==='diary'){cur.diary=(cur.diary?cur.diary+' ':'')+text;continue;}
   if(sec==='advice'){cur.advice=(cur.advice?cur.advice+' ':'')+text;continue;}
   if(DK.indexOf(sec)>=0){
-   if(/[：:]\s*$/.test(text)&&tabs===2){if(cur.isLegend)cur.questsTok[sec].push({cat:text.replace(/[：:]\s*$/,'').trim()});continue;}
+   if(/[：:]\s*$/.test(text)&&tabs===2){catDims.add(sec);if(cur.isLegend)cur.questsTok[sec].push({cat:text.replace(/[：:]\s*$/,'').trim()});continue;}
+   if(tabs===2&&catDims.has(sec))continue;  // bare line sitting among sub-categories = heading/stray, not a completion
    const t=isTarget(text),val=t?tgt(text):text;
    if(cur.isLegend)cur.questsTok[sec].push({item:val,target:t});
    else{if(t)cur.todo[sec].push(val);else cur.done[sec].push(val);}}}
@@ -427,7 +560,7 @@ function score(p){const dimXp={};DIMS.forEach(d=>dimXp[d.k]=0);let total=0;
  const level=Math.floor(total/LVL_XP)+1,into=total%LVL_XP;const today=p.days.find(d=>dnum(d.arr)===tnum)||null;
  return{dimXp,total,streak,level,into,today,tnum}}
 function titleFor(l){let t='NOVICE';for(const[n,name]of TITLES)if(l>=n)t=name;return t}
-let prevTotal=parseInt(recall('dztml_total')||'-1',10),currentMd=DEFAULT_DATA,P=null,S=null,openGem=-1,selKey=0,WK=[];
+let prevTotal=parseInt(recall('dztml_total')||'-1',10),currentMd=DEFAULT_DATA,P=null,S=null,openGem=-1,selKey=0,recKey=0,WK=[];
 
 function render(md){const p=parse(md),s=score(p);P=p;S=s;
  const dmap={};p.days.forEach(d=>dmap[dnum(d.arr)]=d);
@@ -456,14 +589,13 @@ function render(md){const p=parse(md),s=score(p);P=p;S=s;
  tg.innerHTML=th;
  // rules
  document.getElementById('rules').innerHTML=p.rules.length?p.rules.map(r=>'<span class="r" style="display:block">'+esc(r)+'</span>').join(''):'<span style="color:#544e75">no rules set</span>';
- document.getElementById('advice').innerHTML='<span style="color:#8079a8;font-size:8px">Journal &amp; Claude&#39;s notes show under each day in the TODAY tab.</span>';
  // hero
  const hero=document.getElementById('hero');hero.className='hero '+(tItems>0&&s.today&&s.today.cnt===5?'anim-attack':(s.streak>=2?'anim-run':'anim-idle'));
  if(prevTotal>=0&&s.level>Math.floor(prevTotal/LVL_XP)+1)flash('LEVEL UP!');
  prevTotal=s.total;store('dztml_total',String(s.total));document.getElementById('ta').value=md;
  // week log + day detail — current week (Sun→Sat containing today); default selected = today
  if(!WK.some(d=>dnum(d.arr)===selKey))selKey=s.tnum;
- drawWeek();drawDay();}
+ drawWeek();drawDay();drawRecord();drawRadar();}
 
 function drawWeek(){const g=document.getElementById('grid');
  g.innerHTML='<div class="h"></div>'+DIMS.map(d=>'<div class="h">'+d.en+'</div>').join('');
@@ -473,21 +605,49 @@ function drawWeek(){const g=document.getElementById('grid');
   DIMS.forEach(d=>{const has=day.done[d.k].length,td=day.todo[d.k].length;
    g.insertAdjacentHTML('beforeend','<div class="cell '+(has?'':(td?'todo':''))+'" data-day="'+key+'" style="'+(has?('background:'+d.c+';border:none'):'')+'"></div>');});});}
 
-function drawDay(){const day=WK.find(d=>dnum(d.arr)===selKey)||P.days.find(d=>dnum(d.arr)===selKey);const dd=document.getElementById('daydetail'),tt=document.getElementById('dayttl');
- if(!day){tt.textContent='';dd.innerHTML='';return;}
- const wd=new Date(day.arr[0],day.arr[1]-1,day.arr[2]).getDay();
- tt.innerHTML=WD[wd]+' '+esc(day.date)+(dnum(day.arr)===S.tnum?' &middot; TODAY':'');
- let h='';DIMS.forEach(d=>{let its='';day.done[d.k].forEach(x=>its+='<span class="it done">'+esc(x)+'</span>');
+function dayTitle(day){const wd=new Date(day.arr[0],day.arr[1]-1,day.arr[2]).getDay();return WD[wd]+' '+esc(day.date)+(dnum(day.arr)===S.tnum?' &middot; TODAY':'');}
+function dayBody(day){let h='';DIMS.forEach(d=>{let its='';day.done[d.k].forEach(x=>its+='<span class="it done">'+esc(x)+'</span>');
   day.todo[d.k].forEach(x=>its+='<span class="it todo">'+esc(x)+'</span>');
   const n=day.done[d.k].length+day.todo[d.k].length;
   if(!its)its='<span class="it none">&mdash; rest &mdash;</span>';
   h+='<div class="q"><span class="qg" style="background:'+d.c+'">'+d.en+'</span><div class="qitems'+(n>=4?' two-col':'')+'">'+its+'</div></div>';});
  if(day.diary)h+='<div class="jbox"><div class="jlab">JOURNAL &middot; 日记</div><div class="jtext">'+esc(day.diary)+'</div></div>';
  if(day.advice)h+='<div class="abox"><div class="alab">CLAUDE &middot; 建议</div><div class="atext">'+esc(day.advice)+'</div></div>';
- dd.innerHTML=h;}
+ return h;}
 
+function drawDay(){const day=WK.find(d=>dnum(d.arr)===selKey)||P.days.find(d=>dnum(d.arr)===selKey);const dd=document.getElementById('daydetail'),tt=document.getElementById('dayttl');
+ if(!day){tt.textContent='';dd.innerHTML='';return;} tt.innerHTML=dayTitle(day);dd.innerHTML=dayBody(day);}
 function selectDay(key){selKey=key;drawWeek();drawDay();}
 document.getElementById('grid').addEventListener('click',e=>{const t=e.target.closest('[data-day]');if(t)selectDay(+t.getAttribute('data-day'));});
+
+// ===== RECORD (all history) =====
+function drawRecord(){const g=document.getElementById('recgrid');
+ g.innerHTML='<div class="h"></div>'+DIMS.map(d=>'<div class="h">'+d.en+'</div>').join('');
+ P.days.slice().reverse().forEach(day=>{const wd=new Date(day.arr[0],day.arr[1]-1,day.arr[2]).getDay();const key=dnum(day.arr);
+  const cls='d '+(key===S.tnum?'today ':'')+(key===recKey?'sel ':'')+(day.diary?'hasdiary':'');
+  g.insertAdjacentHTML('beforeend','<div class="'+cls+'" data-day="'+key+'"><span class="wd">'+(key===S.tnum?'<span class="tdot"></span>':'')+WD[wd]+'</span><span>'+esc(day.date.replace(/^\d{4}[.]/,''))+'</span></div>');
+  DIMS.forEach(d=>{const has=day.done[d.k].length,td=day.todo[d.k].length;
+   g.insertAdjacentHTML('beforeend','<div class="cell '+(has?'':(td?'todo':''))+'" data-day="'+key+'" style="'+(has?('background:'+d.c+';border:none'):'')+'"></div>');});});
+ drawRecDay();}
+function drawRecDay(){const day=P.days.find(d=>dnum(d.arr)===recKey);const dd=document.getElementById('recdetail'),tt=document.getElementById('recttl');
+ if(!day){tt.textContent='';dd.innerHTML='<span style="color:#8079a8;font-size:9px">Tap a day above to see its tasks, journal and advice.</span>';return;}
+ tt.innerHTML=dayTitle(day);dd.innerHTML=dayBody(day);}
+document.getElementById('recgrid').addEventListener('click',e=>{const t=e.target.closest('[data-day]');if(t){recKey=+t.getAttribute('data-day');drawRecord();}});
+
+// ===== RADAR (五维) =====
+function drawRadar(){const c=document.getElementById('radar');if(!c)return;const dpr=2,SZ=300;c.width=SZ*dpr;c.height=SZ*dpr;c.style.width=SZ+'px';c.style.height=SZ+'px';
+ const ctx=c.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,SZ,SZ);
+ const cx=SZ/2,cy=SZ/2+6,R=96,n=5,ang=i=>(-Math.PI/2)+i*2*Math.PI/n;
+ const vals=DIMS.map(d=>S.dimXp[d.k]),mx=Math.max(1,...vals);
+ ctx.strokeStyle='#332c50';ctx.lineWidth=1;
+ for(let r=1;r<=4;r++){ctx.beginPath();for(let i=0;i<=n;i++){const a=ang(i%n),rr=R*r/4,x=cx+rr*Math.cos(a),y=cy+rr*Math.sin(a);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.closePath();ctx.stroke();}
+ for(let i=0;i<n;i++){const a=ang(i);ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+R*Math.cos(a),cy+R*Math.sin(a));ctx.stroke();}
+ ctx.beginPath();for(let i=0;i<n;i++){const a=ang(i),rr=R*(vals[i]/mx),x=cx+rr*Math.cos(a),y=cy+rr*Math.sin(a);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.closePath();
+ ctx.fillStyle='rgba(255,213,74,.20)';ctx.fill();ctx.strokeStyle='#ffd54a';ctx.lineWidth=2;ctx.stroke();
+ for(let i=0;i<n;i++){const a=ang(i),rr=R*(vals[i]/mx),x=cx+rr*Math.cos(a),y=cy+rr*Math.sin(a);ctx.fillStyle=DIMS[i].c;ctx.beginPath();ctx.arc(x,y,3.5,0,7);ctx.fill();}
+ ctx.font='12px ZenHei,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+ for(let i=0;i<n;i++){const a=ang(i),lx=cx+(R+20)*Math.cos(a),ly=cy+(R+16)*Math.sin(a);ctx.fillStyle=DIMS[i].c;ctx.fillText(DIMS[i].en,lx,ly);}
+ document.getElementById('radarlegend').innerHTML=DIMS.map(d=>{const xp=S.dimXp[d.k],lv=Math.floor(xp/DIM_LVL_XP)+1;return '<span class="rl"><i class="rlc" style="background:'+d.c+'"></i>'+d.en+' Lv'+lv+' &middot; '+xp+'XP</span>';}).join('');}
 
 function renderGem(i){const d=DIMS[i],xp=S.dimXp[d.k],lv2=Math.floor(xp/DIM_LVL_XP)+1,into=xp%DIM_LVL_XP;
  const days=WK.filter(x=>x.done[d.k].length).length;
