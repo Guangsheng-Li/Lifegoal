@@ -570,7 +570,10 @@ let prevTotal=parseInt(recall('dztml_total')||'-1',10),currentMd=DEFAULT_DATA,P=
 
 function render(md){const p=parse(md),s=score(p);P=p;S=s;
  const dmap={};p.days.forEach(d=>dmap[dnum(d.arr)]=d);
- WK=weekDates(s.tnum).map(a=>{const k=dnum(a);return dmap[k]||{date:a[0]+'.'+a[1]+'.'+a[2],arr:a,done:emptyDim(),todo:emptyDim(),cnt:0,items:0,diary:'',advice:''};});
+ // "current week" = the newest week you've populated (or today's week if that's later), so planning-ahead works and Record = earlier weeks
+ const maxE=p.days.length?Math.max.apply(null,p.days.map(d=>dnum(d.arr))):s.tnum;
+ const anchor=Math.max(maxE,s.tnum);
+ WK=weekDates(anchor).map(a=>{const k=dnum(a);return dmap[k]||{date:a[0]+'.'+a[1]+'.'+a[2],arr:a,done:emptyDim(),todo:emptyDim(),cnt:0,items:0,diary:'',advice:''};});
  lv.textContent=s.level;title2.textContent=titleFor(s.level);
  setTimeout(()=>{xpbar.style.width=(s.into/LVL_XP*100)+'%'},60);
  xpnow.textContent=s.into+' XP';xpnext.textContent='/'+LVL_XP+' TO NEXT LV';flame.textContent=s.streak;
@@ -601,7 +604,7 @@ function render(md){const p=parse(md),s=score(p);P=p;S=s;
  if(prevTotal>=0&&s.level>Math.floor(prevTotal/LVL_XP)+1)flash('LEVEL UP!');
  prevTotal=s.total;store('dztml_total',String(s.total));document.getElementById('ta').value=md;
  // week log + day detail — current week (Sun→Sat containing today); default selected = today
- if(!WK.some(d=>dnum(d.arr)===selKey))selKey=s.tnum;
+ if(!WK.some(d=>dnum(d.arr)===selKey))selKey=WK.some(d=>dnum(d.arr)===s.tnum)?s.tnum:dnum(WK[0].arr);
  drawWeek();drawDay();drawRecord();drawRadar();}
 
 function drawWeek(){const g=document.getElementById('grid');
