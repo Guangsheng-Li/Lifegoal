@@ -108,6 +108,12 @@ h1{font-size:14px;margin:0 0 5px;color:var(--xp);text-shadow:2px 2px 0 #7a5a12;l
 .cell{height:22px;border-radius:3px;background:#0c0a18;border:1px solid var(--line);cursor:pointer}
 .cell.todo{border:1px dashed #5a5488;background:#161227}.today .wd{color:var(--xp)}
 .dayttl{font-size:10px;color:var(--xp);margin:14px 2px 10px;letter-spacing:.5px}
+details.fold{border:2px solid var(--line);border-radius:8px;background:var(--panel2);padding:0 10px}
+details.fold>summary{font-size:10px;color:var(--muted);cursor:pointer;padding:10px 0;letter-spacing:.5px;list-style:none}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"\25B8 ";color:var(--xp)}
+details.fold[open]>summary::before{content:"\25BE ";color:var(--xp)}
+.foldbody{padding:4px 0 12px}
 canvas#radar{display:block;margin:8px auto 0;max-width:100%}
 .radarlegend{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-top:14px;font-size:9px;color:var(--muted)}
 .rl{display:inline-flex;align-items:center;gap:5px}
@@ -163,7 +169,7 @@ textarea.fld{height:110px}
  </div>
  <div class="card">
   <div class="pane on" id="p-week">
-   <div class="tsub">WEEK LOG (SUN &#8594; SAT) &middot; TAP A DAY</div>
+   <div class="tsub">WEEK LOG (MON &#8594; SUN) &middot; TAP A DAY</div>
    <div id="grid" class="grid"></div>
    <div class="dayttl" id="dayttl"></div>
    <div id="daydetail"></div>
@@ -504,7 +510,7 @@ function normDate(s){const m=s.match(/(\d{4})\s*[.\-\/]\s*(\d{1,2})\s*[.\-\/]\s*
 function dnum(a){return a?a[0]*10000+a[1]*100+a[2]:0}
 function todayArr(){const d=new Date();return[d.getFullYear(),d.getMonth()+1,d.getDate()]}
 function emptyDim(){const o={};DIMS.forEach(d=>o[d.k]=[]);return o;}
-function weekDates(tnum){const dt=new Date(Math.floor(tnum/10000),(Math.floor(tnum/100)%100)-1,tnum%100);dt.setDate(dt.getDate()-dt.getDay());const out=[];for(let i=0;i<7;i++){const x=new Date(dt);x.setDate(dt.getDate()+i);out.push([x.getFullYear(),x.getMonth()+1,x.getDate()]);}return out;}
+function weekDates(tnum){const dt=new Date(Math.floor(tnum/10000),(Math.floor(tnum/100)%100)-1,tnum%100);dt.setDate(dt.getDate()-((dt.getDay()+6)%7));const out=[];for(let i=0;i<7;i++){const x=new Date(dt);x.setDate(dt.getDate()+i);out.push([x.getFullYear(),x.getMonth()+1,x.getDate()]);}return out;}
 function items(c){return(c||'').split(/<br\s*\/?>/i).map(s=>s.trim()).filter(Boolean)}
 function isTarget(i){return /^T(?![a-z])/.test(i)}
 function tgt(i){return i.replace(/^T/,'').trim()}
@@ -580,12 +586,13 @@ function render(md){const p=parse(md),s=score(p);P=p;S=s;
  if(openGem>=0)renderGem(openGem);
  // targets pane
  const tg=document.getElementById('targets');
- let th='<div class="tsub">WEEK TARGETS'+(p.legendLabel?(' &middot; '+esc(p.legendLabel)):'')+'</div>';
+ let th='<details class="fold"><summary>WEEK TARGETS'+(p.legendLabel?(' &middot; '+esc(p.legendLabel)):'')+'</summary><div class="foldbody">';
  DIMS.forEach(d=>{const toks=p.questsTok[d.k]||[];const daysDone=WK.filter(x=>x.done[d.k].length).length;const nT=toks.filter(t=>t.item).length;
   let its='';toks.forEach(t=>{its+=t.cat?('<span class="cat">'+esc(t.cat)+'</span>'):('<span class="it goal">'+esc(t.item)+'</span>')});
   if(!its)its='<span class="it none">&mdash; none &mdash;</span>';
   th+='<div class="q"><span class="qg" style="background:'+d.c+'">'+d.en+'</span><div class="qitems">'+its+
     '<span class="tprog">'+nT+' target'+(nT===1?'':'s')+' &middot; active '+daysDone+' / '+WK.length+' days</span></div></div>';});
+ th+='</div></details>';
  tg.innerHTML=th;
  // rules
  document.getElementById('rules').innerHTML=p.rules.length?p.rules.map(r=>'<span class="r" style="display:block">'+esc(r)+'</span>').join(''):'<span style="color:#544e75">no rules set</span>';
