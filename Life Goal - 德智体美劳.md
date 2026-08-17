@@ -125,6 +125,7 @@
 	智：
 		TWorldCraft
 		T读历史
+		THL twitter
 	体：T基本运动量
 	美：
 	劳：
@@ -134,8 +135,11 @@
 			TSpeech
 		金融：
 			TMarketSummary
-			TAgri 基本面
 			TAgri模拟交易
+			TQ for Eric Timespread
+			TEric entry point
+			TThesis for Timespread
+			TAgri 基本面
 		数学：
 		计算机：
 	习惯培养:
@@ -145,21 +149,20 @@
 2026.8.17
 	德：
 		早上回顾
-		T晚上回顾
+		晚上回顾
 	智：
 		TWorldCraft
 		T读历史
-	体：T基本运动量
+	体：下班骑车
 	美：
 	劳：
 		英语：
-			T词组背诵
+			词组背诵
 			WSJ阅读
 			TSpeech
 		金融：
 			MarketSummary
-			TAgri 基本面
-			TAgri模拟交易
+			Spread Alert
 		数学：
 		计算机：
 	习惯培养:
