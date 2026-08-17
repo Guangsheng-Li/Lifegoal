@@ -1,15 +1,11 @@
-
-
-
-
-2026.8.17
+2026.8.23
 	德：
 		T早上回顾
 		T晚上回顾
 	智：
 		TWorldView
 		T读历史
-	体：
+	体：T基本运动量
 	美：
 	劳：
 		英语：
@@ -17,9 +13,153 @@
 			TWSJ阅读
 			TSpeech
 		金融：
+			TMarketSummary
 			TAgri 基本面
 			TAgri模拟交易
-		学习
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：、
+2026.8.22
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.21
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.20
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.19
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.18
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			T词组背诵
+			TWSJ阅读
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+		数学：
+		计算机：
+	习惯培养:
+		不看bilibili
+	日记：
+	Claude建议：
+2026.8.17
+	德：
+		早上回顾
+		T晚上回顾
+	智：
+		TWorldView
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			T词组背诵
+			WSJ阅读
+			TSpeech
+		金融：
+			MarketSummary
+			TAgri 基本面
+			TAgri模拟交易
 		数学：
 		计算机：
 	习惯培养:
@@ -33,7 +173,7 @@ No.34
 	智：
 		TWorldView
 		T读历史
-	体：
+	体：T基本运动量
 	美：
 	劳：
 		英语：
@@ -41,9 +181,9 @@ No.34
 			TWSJ阅读
 			TSpeech
 		金融：
+			TMarketSummary
 			TAgri 基本面
 			TAgri模拟交易
-		学习
 		数学：
 		计算机：
 	习惯培养:
@@ -60,7 +200,7 @@ No.34
 		T基础运动量
 	美：
 	劳：
-		T词组背诵
+		词组背诵
 		TWSJ阅读
 		TAgri 基本面
 	习惯培养:
