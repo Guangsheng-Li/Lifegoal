@@ -3,7 +3,7 @@
 		T早上回顾
 		T晚上回顾
 	智：
-		TWorldView
+		TWorldCraft
 		T读历史
 	体：T基本运动量
 	美：
@@ -27,7 +27,7 @@
 		T早上回顾
 		T晚上回顾
 	智：
-		TWorldView
+		TWorldCraft
 		T读历史
 	体：T基本运动量
 	美：
@@ -51,7 +51,7 @@
 		T早上回顾
 		T晚上回顾
 	智：
-		TWorldView
+		TWorldCraft
 		T读历史
 	体：T基本运动量
 	美：
@@ -75,7 +75,7 @@
 		T早上回顾
 		T晚上回顾
 	智：
-		TWorldView
+		TWorldCraft
 		T读历史
 	体：T基本运动量
 	美：
@@ -99,7 +99,7 @@
 		T早上回顾
 		T晚上回顾
 	智：
-		TWorldView
+		TWorldCraft
 		T读历史
 	体：T基本运动量
 	美：
@@ -123,7 +123,7 @@
 		T早上回顾
 		T晚上回顾
 	智：
-		TWorldView
+		TWorldCraft
 		T读历史
 	体：T基本运动量
 	美：
@@ -147,7 +147,7 @@
 		早上回顾
 		T晚上回顾
 	智：
-		TWorldView
+		TWorldCraft
 		T读历史
 	体：T基本运动量
 	美：
@@ -171,7 +171,7 @@ No.34
 		T早上回顾
 		T晚上回顾
 	智：
-		TWorldView
+		TWorldCraft
 		T读历史
 	体：T基本运动量
 	美：
