@@ -107,11 +107,16 @@
 		英语：
 			T词组背诵
 			TWSJ阅读
+			T英语输出
 			TSpeech
 		金融：
 			TMarketSummary
 			TAgri 基本面
 			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TAgri 基本面
+			TPalmOil input
 		数学：
 		计算机：
 	习惯培养:
@@ -120,7 +125,7 @@
 	Claude建议：
 2026.8.18
 	德：
-		T早上回顾
+		早上回顾
 		T晚上回顾
 	智：
 		TWorldCraft
@@ -130,16 +135,18 @@
 	美：
 	劳：
 		英语：
-			T词组背诵
-			TWSJ阅读
+			词组背诵
+			WSJ阅读
 			TSpeech
 		金融：
-			TMarketSummary
-			TAgri模拟交易
-			TQ for Eric Timespread
+			MarketSummary
+			Agri模拟交易
+			Q for Eric Timespread
+			文件数据整理
 			TEric entry point
 			TThesis for Timespread
 			TAgri 基本面
+			TPalmOil input
 		数学：
 		计算机：
 	习惯培养:
@@ -167,8 +174,8 @@
 		计算机：
 	习惯培养:
 		不看bilibili
-	日记：
-	Claude建议：
+	日记：AI is capable to do many tasks. I am using AI to generate "output", which are AI generated base on my instruction. I dont think I shall fall into the delusion that I am being productive. Question 1: What shall I learn from the AI generated output. Question 2: In long term, what shall I do to keep me competitive and away from replacing by AI. 
+	Claude建议：你的直觉是对的，而且这是 8.13 那个陷阱的升级版：8.13 你是只输入不产出；现在你可能是不断生成 AI 产物，却没有让能力长在自己身上。产物不是交付物——你的判断力才是。Q1：不要"读"AI 的输出，去逆向它的推理。今天的 MarketSummary 和 Spread Alert，唯一算作学到的标准，是明天你能不能在没有 AI 的情况下复现那套逻辑、并为这个 trade 辩护；做不到，你就只是发布了，没有学到。Q2：AI 让"生成"变廉价，但没有让判断、信念和对风险的担当变廉价。它能起草分析，但它不能建仓、也不能对 P&L 负责。这就是你作为 Agri trader 的护城河：一个有差异的观点 ＋ 敢下注并持有的纪律 ＋ 对结果的 ownership。所以不是停用 AI，而是把它当会讲解自己推理的 tutor，而不是 ghostwriter。具体规则：每一篇 AI 协助的 note，加一行"我现在理解了、而之前不懂的是什么"；每周独立产出 1 个不借助 AI 的 market call，用来证明能力真的迁移到了你身上。今天你确实交付了真东西（MarketSummary、Spread Alert、德/劳都完成），这是强的一天——担忧成立，但你不是在空转。
 No.34
 	德：
 		T早上回顾
