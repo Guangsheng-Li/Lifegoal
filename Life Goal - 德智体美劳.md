@@ -83,11 +83,16 @@
 		英语：
 			T词组背诵
 			TWSJ阅读
+			T英语输出
 			TSpeech
 		金融：
 			TMarketSummary
 			TAgri 基本面
 			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TAgri 基本面
+			TPalmOil input
 		数学：
 		计算机：
 	习惯培养:
@@ -96,8 +101,8 @@
 	Claude建议：
 2026.8.19
 	德：
-		T早上回顾
-		T晚上回顾
+		早上回顾
+		晚上回顾
 	智：
 		TWorldCraft
 		T读历史
@@ -105,12 +110,12 @@
 	美：
 	劳：
 		英语：
-			T词组背诵
+			词组背诵
 			TWSJ阅读
 			T英语输出
 			TSpeech
 		金融：
-			TMarketSummary
+			MarketSummary
 			TAgri 基本面
 			TAgri模拟交易
 			TEric entry point
