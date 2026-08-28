@@ -1,3 +1,83 @@
+2026.8.28
+	德：
+		早上回顾
+		晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			WSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			Agri 基本面
+			Agri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+2026.8.27
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TAgri 基本面
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做该做的事
+2026.8.26
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TAgri 基本面
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做该做的事
 2026.8.25
 	德：
 		早上回顾
