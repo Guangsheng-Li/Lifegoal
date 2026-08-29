@@ -127,6 +127,7 @@ canvas#radar{display:block;margin:8px auto 0;max-width:100%}
 .atext{color:#f2e8c4}
 
 .rules{font-size:13.2px;color:var(--muted);line-height:2.2}.rules .r::before{content:"x ";color:var(--hp)}
+.drule{margin-top:10px;font-size:13.2px;color:#9a92c2}.drule::before{content:"\2726 ";color:var(--xp)}
 .advice{font-size:13.2px;color:var(--ti);line-height:2.1;margin-top:8px}.advice .a::before{content:"> ";color:var(--de)}
 summary{font-size:11.9px;color:var(--muted);cursor:pointer;padding:2px 0}
 .fld{width:100%;font-family:inherit;font-size:11.9px;background:#0c0a18;color:var(--ink);border:2px solid var(--line);border-radius:6px;padding:8px;margin:6px 0}
@@ -210,7 +211,89 @@ const DIMS=[{k:'德',en:'FAITH',c:'#f0b23e'},{k:'智',en:'MIND',c:'#5b8cf0'},
 const XP_PER=10,FULL_BONUS=50,LVL_XP=100,DIM_LVL_XP=50;
 const WD=['SUN','MON','TUE','WED','THU','FRI','SAT'];
 const TITLES=[[1,'NOVICE'],[3,'APPRENTICE'],[6,'JOURNEYMAN'],[10,'ADEPT'],[15,'VETERAN'],[20,'MASTER'],[30,'GRANDMASTER']];
-const DEFAULT_DATA=`2026.8.25
+const DEFAULT_DATA=`2026.8.28
+	德：
+		早上回顾
+		晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			WSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			Agri 基本面
+			Agri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.8.27
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TAgri 基本面
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做该做的事
+2026.8.26
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TAgri 基本面
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做该做的事
+2026.8.25
 	德：
 		早上回顾
 		T晚上回顾
@@ -266,7 +349,7 @@ const DEFAULT_DATA=`2026.8.25
 		计算机：
 	习惯培养:
 		做该做的事情
-	日记：过去几天不舒服 今天开始 是新的开始
+	日记：
 	Claude建议：
 2026.8.23
 	德：
@@ -649,8 +732,11 @@ function parse(md){const lines=md.split(/\r?\n/);const DK=DIMS.map(d=>d.k);
  days.forEach(day=>{let c=0;DK.forEach(k=>{if(day.done[k].length){c++;day.items+=day.done[k].length;}});day.cnt=c;});
  days.sort((a,b)=>dnum(a.arr)-dnum(b.arr));
  let L={questsTok:{},rules:[],label:''};DK.forEach(k=>L.questsTok[k]=[]);
- if(legends.length)L=legends.reduce((a,b)=>b.num>=a.num?b:a);  // current week = highest No.
- return{days,questsTok:L.questsTok,rules:L.rules,legendLabel:L.label};}
+ if(legends.length)L=legends.reduce((a,b)=>b.num>=a.num?b:a);  // current week targets = highest No.
+ let dispRules=L.rules;                                        // House Rules = latest day's 习惯培养, else legend
+ const wr=days.filter(d=>d.rules&&d.rules.length).sort((a,b)=>dnum(b.arr)-dnum(a.arr));
+ if(wr.length)dispRules=wr[0].rules;
+ return{days,questsTok:L.questsTok,rules:dispRules,legendLabel:L.label};}
 function score(p){const dimXp={};DIMS.forEach(d=>dimXp[d.k]=0);let total=0;
  p.days.forEach(day=>{let c=0;DIMS.forEach(d=>{const n=day.done[d.k].length;dimXp[d.k]+=n*XP_PER;total+=n*XP_PER;if(n)c++});if(c===5)total+=FULL_BONUS});
  const tnum=dnum(todayArr());
@@ -718,6 +804,7 @@ function dayBody(day){let h='';DIMS.forEach(d=>{let its='';day.done[d.k].forEach
   const n=day.done[d.k].length+day.todo[d.k].length;
   if(!its)its='<span class="it none">&mdash; rest &mdash;</span>';
   h+='<div class="q"><span class="qg" style="background:'+d.c+'">'+d.en+'</span><div class="qitems'+(n>=4?' two-col':'')+'">'+its+'</div></div>';});
+ if(day.rules&&day.rules.length)h+='<div class="drule">习惯培养 &middot; '+day.rules.map(esc).join(' &middot; ')+'</div>';
  if(day.diary)h+='<div class="jbox"><div class="jlab">JOURNAL &middot; 日记</div><div class="jtext">'+esc(day.diary)+'</div></div>';
  if(day.advice)h+='<div class="abox"><div class="alab">CLAUDE &middot; 建议</div><div class="atext">'+esc(day.advice)+'</div></div>';
  return h;}
