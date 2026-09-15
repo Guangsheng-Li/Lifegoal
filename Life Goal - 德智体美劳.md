@@ -1,21 +1,362 @@
-2026.8.29
+
+
+2026.9.16
+	德：
+		早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			T词组背诵
+			T英语review
+			TPodcast
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			Tjob mkt
+			TMarketSummary
+			Ttradeview 文华价格
+			TAgri 基本面
+			TAgri模拟交易
+			Thorizon分析 platts分析
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.9.15
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			英语review
+			Podcast
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			Tjob mkt
+			MarketSummary
+			Ttradeview 文华价格
+			Agri 基本面
+			TAgri模拟交易
+			Thorizon分析 platts分析
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.9.14
 	德：
 		早上回顾
 		晚上回顾
 	智：
-		WorldCraft
+		TWorldCraft
+		T读历史、书
+	体：早骑车 晚爬楼梯
+	美：
+	劳：
+		英语：
+			词组背诵
+			英语review
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			Agri learning
+			TAgri模拟交易
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.9.7
+	德：
+		早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.9.6
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
 		T读历史
 	体：T基本运动量
 	美：
 	劳：
 		英语：
 			词组背诵
-			WSJ阅读
+			TWSJ阅读
 			T英语输出
 			TSpeech
 		金融：
-			MarketSummary
-			Agri 基本面
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.9.5
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：梦到高考
+	Claude建议：
+2026.9.4
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.9.3
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.9.2
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：2026.9.2
+	德：
+		早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.9.1
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：梦到高考
+	Claude建议：
+2026.8.31
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
+			TAgri模拟交易
+			TEric entry point
+			TThesis for Timespread
+			TPalmOil input
+		数学：
+		计算机：
+	习惯培养:
+		做有难度的事情
+	日记：
+	Claude建议：
+2026.8.30
+	德：
+		T早上回顾
+		T晚上回顾
+	智：
+		TWorldCraft
+		T读历史
+	体：T基本运动量
+	美：
+	劳：
+		英语：
+			词组背诵
+			TWSJ阅读
+			T英语输出
+			TSpeech
+		金融：
+			TMarketSummary
+			TAgri 基本面
 			TAgri模拟交易
 			TEric entry point
 			TThesis for Timespread
